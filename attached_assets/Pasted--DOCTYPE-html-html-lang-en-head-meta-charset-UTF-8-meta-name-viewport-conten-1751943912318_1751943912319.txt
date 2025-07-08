@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Automation Engineer Learning Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 1800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .header h1 {
+        color: #2c3e50;
+        font-size: 3em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .header p {
+        color: #7f8c8d;
+        font-size: 1.2em;
+    }
+    
+    .nav-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 3px solid #ecf0f1;
+        overflow-x: auto;
+    }
+    
+    .nav-tab {
+        padding: 15px 25px;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border: none;
+        border-radius: 10px 10px 0 0;
+        cursor: pointer;
+        font-weight: bold;
+        color: #6c757d;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .nav-tab.active {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        transform: translateY(-3px);
+    }
+    
+    .nav-tab:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-card {
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stat-number {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        color: #7f8c8d;
+        font-size: 1em;
+        font-weight: 500;
+    }
+    
+    .learning-path-selector {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+    
+    .path-card {
+        flex: 1;
+        min-width: 250px;
+        padding: 20px;
+        border: 3px solid #e9ecef;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .path-card.selected {
+        border-color: #667eea;
+        background: linear-gradient(135deg, #f8f9ff, #ffffff);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    }
+    
+    .path-card h3 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 1.3em;
+    }
+    
+    .path-card p {
+        color: #7f8c8d;
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+    
+    .filters {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+    }
+    
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .filter-group label {
+        font-weight: bold;
+        color: #34495e;
+        font-size: 0.9em;
+    }
+    
+    select, input {
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    select:focus, input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .table-container {
+        overflow-x: auto;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        background: white;
+        max-height: 600px;
+        overflow-y: auto;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+    
+    th {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px 10px;
+        text-align: left;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 3px solid #5a67d8;
+        cursor: pointer;
+        user-select: none;
+    }
+    
+    th:hover {
+        background: linear-gradient(135deg, #5a67d8, #6b5b95);
+    }
+    
+    td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #ecf0f1;
+        vertical-align: top;
+        transition: background-color 0.2s ease;
+    }
+    
+    tr:hover {
+        background-color: #f8f9ff;
+    }
+    
+    .progress-selector {
+        padding: 8px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+        font-size: 12px;
+        min-width: 120px;
+    }
+    
+    .progress-not-started {
+        background: #ffeaa7;
+        border-color: #fdcb6e;
+        color: #e17055;
+    }
+    
+    .progress-in-progress {
+        background: #74b9ff;
+        border-color: #0984e3;
+        color: white;
+    }
+    
+    .progress-completed {
+        background: #55a3ff;
+        border-color: #00b894;
+        color: white;
+    }
+    
+    .month-badge {
+        background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+        min-width: 60px;
+    }
+    
+    .priority-high {
+        background: linear-gradient(90deg, #ff6b6b, #ee5a52);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    
+    .priority-medium {
+        background: linear-gradient(90deg, #ffa726, #ff9800);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    
+    .priority-low {
+        background: linear-gradient(90deg, #66bb6a, #4caf50);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    
+    .cost-free {
+        color: #27ae60;
+        font-weight: bold;
+    }
+    
+    .cost-paid {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+    
+    .difficulty {
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    
+    .difficulty-beginner {
+        background: #d5f4e6;
+        color: #27ae60;
+    }
+    
+    .difficulty-intermediate {
+        background: #fff3cd;
+        color: #f39c12;
+    }
+    
+    .difficulty-advanced {
+        background: #f8d7da;
+        color: #e74c3c;
+    }
+    
+    .link {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+    
+    .link:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+    
+    .category-tag {
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    
+    .category-programming {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+    
+    .category-ml {
+        background: #f3e5f5;
+        color: #7b1fa2;
+    }
+    
+    .category-cloud {
+        background: #e8f5e8;
+        color: #388e3c;
+    }
+    
+    .category-devops {
+        background: #fff3e0;
+        color: #f57c00;
+    }
+    
+    .category-data {
+        background: #e1f5fe;
+        color: #0277bd;
+    }
+    
+    .category-soft {
+        background: #fce4ec;
+        color: #c2185b;
+    }
+    
+    .category-emerging {
+        background: #f1f8e9;
+        color: #689f38;
+    }
+    
+    .category-math {
+        background: #fff8e1;
+        color: #f57f17;
+    }
+    
+    .category-agents {
+        background: #e8eaf6;
+        color: #3f51b5;
+    }
+    
+    .category-security {
+        background: #ffebee;
+        color: #d32f2f;
+    }
+    
+    .notes-input {
+        width: 100%;
+        max-width: 200px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 12px;
+        resize: vertical;
+        min-height: 40px;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+    }
+    
+    .btn-success {
+        background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+        color: white;
+    }
+    
+    .btn-info {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    
+    .hidden {
+        display: none !important;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Automation Engineer Learning Tracker</h1>
+            <p>Complete roadmap with 103+ advanced resources, monthly planning, and progress tracking</p>
+        </div>
+
+```
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
+        <button class="nav-tab" onclick="showTab('resources')">📚 All Resources</button>
+        <button class="nav-tab" onclick="showTab('timeline')">📅 Monthly Timeline</button>
+        <button class="nav-tab" onclick="showTab('progress')">📈 Progress Tracker</button>
+    </div>
+    
+    <!-- Dashboard Tab -->
+    <div id="dashboard" class="tab-content active">
+        <div class="dashboard">
+            <div class="stat-card">
+                <div class="stat-number" style="color: #667eea;" id="totalResources">103</div>
+                <div class="stat-label">Total Resources</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #27ae60;" id="completedResources">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #f39c12;" id="inProgressResources">0</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #e74c3c;" id="notStartedResources">103</div>
+                <div class="stat-label">Not Started</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #27ae60;" id="freeResources">42</div>
+                <div class="stat-label">Free Resources</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #e74c3c;" id="advancedResources">38</div>
+                <div class="stat-label">Advanced Level</div>
+            </div>
+        </div>
+        
+        <div class="learning-path-selector">
+            <div class="path-card selected" data-path="beginner">
+                <h3>🌱 Beginner Path (18 months)</h3>
+                <p>0-2 years experience. Foundation in Python, basic ML, mathematical foundations, and cloud fundamentals.</p>
+            </div>
+            <div class="path-card" data-path="intermediate">
+                <h3>🚀 Intermediate Path (15 months)</h3>
+                <p>2-5 years experience. Advanced ML, MLOps, agents, vector databases, and specialization.</p>
+            </div>
+            <div class="path-card" data-path="advanced">
+                <h3>⚡ Advanced Path (12 months)</h3>
+                <p>5+ years experience. Multi-agent systems, MCP, cutting-edge research, and strategic AI leadership.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Resources Tab -->
+    <div id="resources" class="tab-content">
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="exportToCSV()">📊 Export CSV</button>
+            <button class="btn btn-success" onclick="saveProgress()">💾 Save Progress</button>
+            <button class="btn btn-info" onclick="loadProgress()">📁 Load Progress</button>
+            <button class="btn btn-info" onclick="resetProgress()">🔄 Reset All</button>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="categoryFilter">Category</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="AI Agents">AI Agents</option>
+                    <option value="Cloud Platforms">Cloud Platforms</option>
+                    <option value="DevOps/MLOps">DevOps/MLOps</option>
+                    <option value="Data Engineering">Data Engineering</option>
+                    <option value="Emerging Tech">Emerging Tech</option>
+                    <option value="Security">Security</option>
+                    <option value="Soft Skills">Soft Skills</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="typeFilter">Type</label>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="Course">Course</option>
+                    <option value="Certification">Certification</option>
+                    <option value="Book">Book</option>
+                    <option value="Platform">Platform</option>
+                    <option value="Documentation">Documentation</option>
+                    <option value="Repository">Repository</option>
+                    <option value="Tutorial">Tutorial</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="difficultyFilter">Difficulty</label>
+                <select id="difficultyFilter">
+                    <option value="">All Levels</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="costFilter">Cost</label>
+                <select id="costFilter">
+                    <option value="">All</option>
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="progressFilter">Progress</label>
+                <select id="progressFilter">
+                    <option value="">All Progress</option>
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="monthFilter">Month</label>
+                <select id="monthFilter">
+                    <option value="">All Months</option>
+                    <option value="1">Month 1</option>
+                    <option value="2">Month 2</option>
+                    <option value="3">Month 3</option>
+                    <option value="4">Month 4</option>
+                    <option value="5">Month 5</option>
+                    <option value="6">Month 6</option>
+                    <option value="7">Month 7</option>
+                    <option value="8">Month 8</option>
+                    <option value="9">Month 9</option>
+                    <option value="10">Month 10</option>
+                    <option value="11">Month 11</option>
+                    <option value="12">Month 12</option>
+                    <option value="13">Month 13+</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="searchInput">Search</label>
+                <input type="text" id="searchInput" placeholder="Search resources...">
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="resourceTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Title</th>
+                        <th onclick="sortTable(1)">Category</th>
+                        <th onclick="sortTable(2)">Type</th>
+                        <th onclick="sortTable(3)">Provider</th>
+                        <th onclick="sortTable(4)">Duration</th>
+                        <th onclick="sortTable(5)">Cost</th>
+                        <th onclick="sortTable(6)">Difficulty</th>
+                        <th onclick="sortTable(7)">Priority</th>
+                        <th onclick="sortTable(8)">Month</th>
+                        <th onclick="sortTable(9)">Experience Level</th>
+                        <th>Progress</th>
+                        <th>Link</th>
+                        <th>Personal Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- MONTH 1 - Mathematical Foundations -->
+                    <tr data-path="beginner" data-month="1">
+                        <td>Mathematics for Machine Learning Specialization</td>
+                        <td><span class="category-tag category-math">Mathematics</span></td>
+                        <td>Course</td>
+                        <td>Imperial College London (Coursera)</td>
+                        <td>4 months, 7 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 1</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/specializations/mathematics-machine-learning" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Linear algebra, multivariate calculus, PCA..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="1">
+                        <td>Python for Everybody Specialization</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Course</td>
+                        <td>University of Michigan (Coursera)</td>
+                        <td>5 months, 3 hrs/week</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 1</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/specializations/python" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Add personal notes..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="1">
+                        <td>Kaggle Learn Python Course</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Tutorial</td>
+                        <td>Kaggle</td>
+                        <td>7 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 1</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.kaggle.com/learn/python" class="link">Start Learning</a></td>
+                        <td><textarea class="notes-input" placeholder="Add personal notes..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="1">
+                        <td>Google Colab</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Platform</td>
+                        <td>Google</td>
+                        <td>As needed</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 1</span></td>
+                        <td>All Levels</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://colab.research.google.com/" class="link">Start Coding</a></td>
+                        <td><textarea class="notes-input" placeholder="Free GPU access for ML development..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 2 - Programming Foundations -->
+                    <tr data-path="beginner" data-month="2">
+                        <td>Automate the Boring Stuff with Python</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Book/Course</td>
+                        <td>Al Sweigart</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 2</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://automatetheboringstuff.com/" class="link">View Resource</a></td>
+                        <td><textarea class="notes-input" placeholder="Practical automation focus..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="2">
+                        <td>Python Data Science Handbook</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Book</td>
+                        <td>Jake VanderPlas</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 2</span></td>
+                        <td>Entry-Mid Level (1-3 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://jakevdp.github.io/PythonDataScienceHandbook/" class="link">Read Online</a></td>
+                        <td><textarea class="notes-input" placeholder="Comprehensive Python data science guide..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="2">
+                        <td>Kaggle Learn Pandas</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Tutorial</td>
+                        <td>Kaggle</td>
+                        <td>4 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 2</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.kaggle.com/learn/pandas" class="link">Start Learning</a></td>
+                        <td><textarea class="notes-input" placeholder="Data manipulation fundamentals..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate" data-month="2">
+                        <td>Async Python Programming</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Course</td>
+                        <td>Talk Python Training</td>
+                        <td>4.5 hours</td>
+                        <td class="cost-paid">$49</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 2</span></td>
+                        <td>Mid Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://training.talkpython.fm/courses/explore_async_python/async-in-python-with-threading-and-multiprocessing" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="AsyncIO, threading, multiprocessing..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 3 - Machine Learning Foundations -->
+                    <tr data-path="beginner" data-month="3">
+                        <td>Machine Learning Specialization</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Andrew Ng (Coursera)</td>
+                        <td>3 months, 10 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 3</span></td>
+                        <td>Entry-Mid Level (0-3 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/specializations/machine-learning-introduction" class="link">Enroll Now</a></td>
+                        <td><textarea class="notes-input" placeholder="Gold standard for ML education..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="3">
+                        <td>Google ML Crash Course</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Google</td>
+                        <td>15 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 3</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://developers.google.com/machine-learning/crash-course" class="link">Start Learning</a></td>
+                        <td><textarea class="notes-input" placeholder="Fast-paced introduction with 100+ exercises..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="3">
+                        <td>Kaggle Learn Intro to Machine Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Tutorial</td>
+                        <td>Kaggle</td>
+                        <td>3 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 3</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.kaggle.com/learn/intro-to-machine-learning" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Quick ML introduction..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="3">
+                        <td>Stanford CS229 Machine Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Stanford University</td>
+                        <td>Full semester</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 3</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="http://cs229.stanford.edu/" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Advanced mathematical ML foundations..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 4 - Cloud Foundations -->
+                    <tr data-path="beginner" data-month="4">
+                        <td>AWS Cloud Practitioner</td>
+                        <td><span class="category-tag category-cloud">Cloud Platforms</span></td>
+                        <td>Certification</td>
+                        <td>Amazon Web Services</td>
+                        <td>1-2 months prep</td>
+                        <td class="cost-paid">$100 exam</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 4</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="Entry-level cloud certification..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="4">
+                        <td>Azure AI Fundamentals (AI-900)</td>
+                        <td><span class="category-tag category-cloud">Cloud Platforms</span></td>
+                        <td>Certification</td>
+                        <td>Microsoft</td>
+                        <td>1-2 months prep</td>
+                        <td class="cost-paid">$99 exam</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 4</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="Entry-level Azure AI certification..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate" data-month="4">
+                        <td>Introduction to Machine Learning with Python</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Book</td>
+                        <td>Andreas Mueller (O'Reilly)</td>
+                        <td>Self-paced</td>
+                        <td class="cost-paid">$49.99</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 4</span></td>
+                        <td>Entry-Mid Level (1-3 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.oreilly.com/library/view/introduction-to-machine/9781449369880/" class="link">View Book</a></td>
+                        <td><textarea class="notes-input" placeholder="Practical ML with Python guide..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 5 - Deep Learning Foundations -->
+                    <tr data-path="beginner,intermediate" data-month="5">
+                        <td>Fast.ai Practical Deep Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Fast.ai</td>
+                        <td>7 weeks, 10-15 hrs/week</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 5</span></td>
+                        <td>Mid Level (2-5 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://course.fast.ai/" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Top-down approach with PyTorch..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate" data-month="5">
+                        <td>Deep Learning with Python</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Book</td>
+                        <td>François Chollet</td>
+                        <td>Self-paced</td>
+                        <td class="cost-paid">$49.99</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 5</span></td>
+                        <td>Mid Level (2-5 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.manning.com/books/deep-learning-with-python" class="link">View Book</a></td>
+                        <td><textarea class="notes-input" placeholder="Deep learning fundamentals with Keras..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate" data-month="5">
+                        <td>Hands-On Machine Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Book</td>
+                        <td>Aurélien Géron (O'Reilly)</td>
+                        <td>Self-paced</td>
+                        <td class="cost-paid">$59.99</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 5</span></td>
+                        <td>Mid Level (1-4 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/" class="link">View Book</a></td>
+                        <td><textarea class="notes-input" placeholder="Comprehensive practical ML guide..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate" data-month="5">
+                        <td>PyTorch Deep Learning Course</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>DataCamp</td>
+                        <td>4 hours</td>
+                        <td class="cost-paid">$25/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 5</span></td>
+                        <td>Mid Level (2-4 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="PyTorch neural networks, CNNs, RNNs..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 6 - DevOps & Infrastructure -->
+                    <tr data-path="beginner,intermediate" data-month="6">
+                        <td>Docker Fundamentals</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Course</td>
+                        <td>Docker</td>
+                        <td>6 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 6</span></td>
+                        <td>Entry-Mid Level (1-3 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://docs.docker.com/get-started/" class="link">Get Started</a></td>
+                        <td><textarea class="notes-input" placeholder="Containerization fundamentals..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate" data-month="6">
+                        <td>Introduction to Jenkins</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Course</td>
+                        <td>Linux Foundation</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 6</span></td>
+                        <td>Entry-Mid Level (1-3 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://training.linuxfoundation.org/training/introduction-to-jenkins-lfs167/" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Free Jenkins fundamentals training..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate" data-month="6">
+                        <td>Introduction to Containers w/ Docker, Kubernetes & OpenShift</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Course</td>
+                        <td>IBM (Coursera)</td>
+                        <td>3 weeks</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 6</span></td>
+                        <td>Mid Level (2-4 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/learn/ibm-containers-docker-kubernetes-openshift" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Container orchestration with hands-on labs..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate" data-month="6">
+                        <td>Git and GitHub Essentials</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Course</td>
+                        <td>GitHub</td>
+                        <td>4 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 6</span></td>
+                        <td>All Levels</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://skills.github.com/" class="link">Start Learning</a></td>
+                        <td><textarea class="notes-input" placeholder="Version control fundamentals..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 7 - Emerging Technologies (Prompt Engineering & LLMs) -->
+                    <tr data-path="beginner,intermediate,advanced" data-month="7">
+                        <td>Prompt Engineering for Developers</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>DeepLearning.AI</td>
+                        <td>1 hour</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 7</span></td>
+                        <td>All Levels</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Andrew Ng and OpenAI collaboration..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate,advanced" data-month="7">
+                        <td>Prompt Engineering for ChatGPT</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>Vanderbilt University (Coursera)</td>
+                        <td>6 weeks, 2-3 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 7</span></td>
+                        <td>All Levels</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/learn/prompt-engineering" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Expert-led training on prompt patterns..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="7">
+                        <td>Generative AI with Large Language Models</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>DeepLearning.AI & AWS</td>
+                        <td>3 weeks, 16 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 7</span></td>
+                        <td>Mid-Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/learn/generative-ai-with-llms" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Complete LLM lifecycle: pretraining to deployment..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="7">
+                        <td>LangChain Documentation</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Documentation</td>
+                        <td>LangChain</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 7</span></td>
+                        <td>Mid Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://python.langchain.com/docs/get_started" class="link">Read Docs</a></td>
+                        <td><textarea class="notes-input" placeholder="Framework guidance for LLM applications..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 8 - AI Agents & Advanced Systems -->
+                    <tr data-path="intermediate,advanced" data-month="8">
+                        <td>AI Agents in LangGraph</td>
+                        <td><span class="category-tag category-agents">AI Agents</span></td>
+                        <td>Course</td>
+                        <td>DeepLearning.AI</td>
+                        <td>2 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 8</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Controllable agents using LangGraph framework..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="8">
+                        <td>Multi AI Agent Systems with crewAI</td>
+                        <td><span class="category-tag category-agents">AI Agents</span></td>
+                        <td>Course</td>
+                        <td>DeepLearning.AI</td>
+                        <td>2 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 8</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.deeplearning.ai/short-courses/multi-ai-agent-systems-with-crewai/" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Collaboration patterns and role-playing systems..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="8">
+                        <td>Agentic AI with LangGraph, CrewAI, AutoGen and BeeAI</td>
+                        <td><span class="category-tag category-agents">AI Agents</span></td>
+                        <td>Course</td>
+                        <td>IBM (Coursera)</td>
+                        <td>4 weeks, 5-7 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 8</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/learn/agentic-ai-with-langgraph-crewai-autogen-and-bee" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Multiple frameworks for advanced practitioners..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="8">
+                        <td>Model Context Protocol (MCP) Documentation</td>
+                        <td><span class="category-tag category-agents">AI Agents</span></td>
+                        <td>Documentation</td>
+                        <td>Anthropic</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 8</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://modelcontextprotocol.io/docs" class="link">View Docs</a></td>
+                        <td><textarea class="notes-input" placeholder="JSON-RPC messaging, client-server architecture..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 9 - MLOps & Advanced Infrastructure -->
+                    <tr data-path="intermediate,advanced" data-month="9">
+                        <td>MLOps Specialization</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Course</td>
+                        <td>Duke University (Coursera)</td>
+                        <td>4 months, 5 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Mid-Senior Level (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/specializations/mlops-machine-learning-duke" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Python, Rust, MLflow, SageMaker, Azure ML..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="9">
+                        <td>MLOps-Basics GitHub Repository</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Repository</td>
+                        <td>Community Project</td>
+                        <td>9 weeks</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Mid Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://github.com/graviraja/MLOps-Basics" class="link">View Repository</a></td>
+                        <td><textarea class="notes-input" placeholder="9-week project-based MLOps course..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="9">
+                        <td>ETL and Data Pipelines with Airflow and Kafka</td>
+                        <td><span class="category-tag category-data">Data Engineering</span></td>
+                        <td>Course</td>
+                        <td>IBM (Coursera)</td>
+                        <td>4 weeks, 4-6 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Mid Level (2-5 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/learn/etl-and-data-pipelines-shell-airflow-kafka" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Practical data pipeline development..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="9">
+                        <td>Kubeflow Documentation</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Documentation</td>
+                        <td>Kubeflow Community</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.kubeflow.org/docs/started/introduction/" class="link">View Docs</a></td>
+                        <td><textarea class="notes-input" placeholder="ML workflows on Kubernetes, pipeline management..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 10 - Advanced Cloud & Vector Databases -->
+                    <tr data-path="intermediate,advanced" data-month="10">
+                        <td>AWS Certified Machine Learning - Specialty</td>
+                        <td><span class="category-tag category-cloud">Cloud Platforms</span></td>
+                        <td>Certification</td>
+                        <td>Amazon Web Services</td>
+                        <td>3-6 months prep</td>
+                        <td class="cost-paid">$300 exam</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>Mid-Senior Level (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://aws.amazon.com/certification/certified-machine-learning-specialty/" class="link">Learn More</a></td>
+                        <td><textarea class="notes-input" placeholder="Covers SageMaker, Lambda, EC2, S3, AI services..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="10">
+                        <td>Azure AI Engineer Associate</td>
+                        <td><span class="category-tag category-cloud">Cloud Platforms</span></td>
+                        <td>Certification</td>
+                        <td>Microsoft</td>
+                        <td>2-4 months prep</td>
+                        <td class="cost-paid">$165 exam</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>Mid-Senior Level (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="Azure ML, AutoML, designer tools, monitoring..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="10">
+                        <td>Vector Databases for Embeddings with Pinecone</td>
+                        <td><span class="category-tag category-data">Data Engineering</span></td>
+                        <td>Course</td>
+                        <td>DataCamp</td>
+                        <td>4 hours</td>
+                        <td class="cost-paid">$25/month</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>Mid Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.datacamp.com/tutorial/mastering-vector-databases-with-pinecone-tutorial" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Similarity search and RAG applications..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="10">
+                        <td>Exploring Vector Databases: Comprehensive Guide</td>
+                        <td><span class="category-tag category-data">Data Engineering</span></td>
+                        <td>Tutorial</td>
+                        <td>Mehmet Ozkaya (Medium)</td>
+                        <td>2-3 hours</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://mehmetozkaya.medium.com/exploring-vector-databases-pinecone-chroma-weaviate-qdrant-milvus-pgvector-and-redis-f0618fe9e92d" class="link">Read Guide</a></td>
+                        <td><textarea class="notes-input" placeholder="Pinecone, Chroma, Weaviate, Qdrant, Milvus..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 11 - RAG & Fine-tuning -->
+                    <tr data-path="intermediate,advanced" data-month="11">
+                        <td>Building and Evaluating Advanced RAG Applications</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>DeepLearning.AI</td>
+                        <td>1 hour</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 11</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Sentence-window retrieval, evaluation frameworks..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="11">
+                        <td>Master RAG: Ultimate Retrieval-Augmented Generation Course</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>Udemy</td>
+                        <td>12 hours</td>
+                        <td class="cost-paid">$89.99</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 11</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.udemy.com/course/llm-retrieval-augmented-generation-masterclass/" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="LangChain integration, multi-agent applications..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="11">
+                        <td>Fine-Tuning LLMs: LoRA and QLoRA</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Repository</td>
+                        <td>University of Washington</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 11</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://github.com/artidoro/qlora" class="link">View Repository</a></td>
+                        <td><textarea class="notes-input" placeholder="4-bit quantization techniques..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="11">
+                        <td>LLM Fine Tuning Fundamentals + OpenAI GPT</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>Udemy</td>
+                        <td>8 hours</td>
+                        <td class="cost-paid">$79.99</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 11</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.udemy.com/course/openai-llm-fine-tuning-course/" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Fine-tune OpenAI GPT model..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTH 12 - Advanced Specializations -->
+                    <tr data-path="advanced" data-month="12">
+                        <td>Multimodal Machine Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Carnegie Mellon University</td>
+                        <td>Full semester</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 12</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="http://multicomp.cs.cmu.edu/resources/lti-11777-multimodal-machine-learning/" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="PhD-level training on alignment, fusion..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="12">
+                        <td>Generative AI Multimodal Certification</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Certification</td>
+                        <td>NVIDIA</td>
+                        <td>1-2 months prep</td>
+                        <td class="cost-paid">$299 exam</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 12</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.nvidia.com/en-us/learn/certification/generative-ai-multimodal-associate/" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="Text, image, and audio modalities..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="12">
+                        <td>Grokking the Generative AI System Design</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>Educative</td>
+                        <td>15 hours</td>
+                        <td class="cost-paid">$79/month</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 12</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.educative.io/courses/generative-ai-system-design" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="SCALED framework, text-to-text, text-to-image..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="12">
+                        <td>MIT Professional Certificate in ML & AI</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>MIT Professional Education</td>
+                        <td>6 months</td>
+                        <td class="cost-paid">$3,500</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-low">Low</span></td>
+                        <td><span class="month-badge">Month 12</span></td>
+                        <td>Advanced (5+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://professional.mit.edu/course-catalog/professional-certificate-program-machine-learning-artificial-intelligence-0" class="link">Learn More</a></td>
+                        <td><textarea class="notes-input" placeholder="Intensive 4-day training with group projects..."></textarea></td>
+                    </tr>
+                    
+                    <!-- MONTHS 13+ - Ongoing Specializations -->
+                    <tr data-path="intermediate,advanced" data-month="13">
+                        <td>Master LLM Optimization: Performance & Efficiency</td>
+                        <td><span class="category-tag category-emerging">Emerging Tech</span></td>
+                        <td>Course</td>
+                        <td>Udemy</td>
+                        <td>10 hours</td>
+                        <td class="cost-paid">$89.99</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 13+</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.udemy.com/course/master-llm-optimization-boost-ai-performance-efficiency/" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Quantization, fine-tuning, scaling techniques..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="13">
+                        <td>AI Security Professional Certification</td>
+                        <td><span class="category-tag category-security">Security</span></td>
+                        <td>Certification</td>
+                        <td>Practical DevSecOps</td>
+                        <td>3-6 months prep</td>
+                        <td class="cost-paid">$999</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 13+</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.practical-devsecops.com/certified-ai-security-professional/" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="MITRE ATLAS, OWASP Top 10 LLM, adversarial attacks..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="13">
+                        <td>Explainable AI (XAI) Specialization</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Duke University (Coursera)</td>
+                        <td>4 months, 4-6 hrs/week</td>
+                        <td class="cost-paid">$49/month</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 13+</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/specializations/explainable-artificial-intelligence-xai" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Mechanistic interpretability, LIME, SHAP..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Soft Skills & Business Integration -->
+                    <tr data-path="beginner,intermediate,advanced" data-month="10">
+                        <td>Technical Communication for Engineers</td>
+                        <td><span class="category-tag category-soft">Soft Skills</span></td>
+                        <td>Course</td>
+                        <td>Udemy</td>
+                        <td>6 hours</td>
+                        <td class="cost-paid">$49.99</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>All Levels</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.udemy.com/course/technical-communication-for-engineers/" class="link">Learn More</a></td>
+                        <td><textarea class="notes-input" placeholder="Enhancing technical communication skills..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner,intermediate,advanced" data-month="10">
+                        <td>Google Technical Writing Courses</td>
+                        <td><span class="category-tag category-soft">Soft Skills</span></td>
+                        <td>Course</td>
+                        <td>Google</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>All Levels</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://developers.google.com/tech-writing" class="link">Start Writing</a></td>
+                        <td><textarea class="notes-input" placeholder="Clear documentation and writing fundamentals..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="11">
+                        <td>MLExpert</td>
+                        <td><span class="category-tag category-soft">Soft Skills</span></td>
+                        <td>Platform</td>
+                        <td>AlgoExpert</td>
+                        <td>Self-paced</td>
+                        <td class="cost-paid">$99/year</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 11</span></td>
+                        <td>Mid-Senior Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.algoexpert.io/machine-learning/product" class="link">Start Prep</a></td>
+                        <td><textarea class="notes-input" placeholder="Comprehensive ML interview preparation..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Ongoing Practice Platforms -->
+                    <tr data-path="beginner,intermediate,advanced" data-month="5">
+                        <td>Kaggle Competitions</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Platform</td>
+                        <td>Kaggle</td>
+                        <td>Ongoing</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 5</span></td>
+                        <td>Mid Level (1+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.kaggle.com/competitions" class="link">Join Competitions</a></td>
+                        <td><textarea class="notes-input" placeholder="Real-world datasets and practice..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="10">
+                        <td>Papers with Code</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Platform</td>
+                        <td>Papers with Code</td>
+                        <td>Ongoing</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>Senior Level (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://paperswithcode.com/" class="link">Browse Papers</a></td>
+                        <td><textarea class="notes-input" placeholder="Implementing cutting-edge research..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Additional Essential Resources -->
+                    <tr data-path="beginner,intermediate" data-month="4">
+                        <td>Real Python Platform</td>
+                        <td><span class="category-tag category-programming">Programming</span></td>
+                        <td>Platform</td>
+                        <td>Real Python</td>
+                        <td>Ongoing</td>
+                        <td class="cost-paid">$60/year</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 4</span></td>
+                        <td>Entry-Mid Level (1-4 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://realpython.com/" class="link">Join Community</a></td>
+                        <td><textarea class="notes-input" placeholder="High-quality Python tutorials and articles..."></textarea></td>
+                    </tr>
+                    <tr data-path="beginner" data-month="5">
+                        <td>DataCamp Platform</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Platform</td>
+                        <td>DataCamp</td>
+                        <td>Ongoing</td>
+                        <td class="cost-paid">$25/month</td>
+                        <td><span class="difficulty difficulty-beginner">Beginner</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 5</span></td>
+                        <td>Entry Level (0-2 years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.datacamp.com/" class="link">Start Learning</a></td>
+                        <td><textarea class="notes-input" placeholder="Interactive data science courses..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Advanced Framework Resources -->
+                    <tr data-path="intermediate,advanced" data-month="8">
+                        <td>Hugging Face Transformers Course</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Hugging Face</td>
+                        <td>8 chapters</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 8</span></td>
+                        <td>Mid Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://huggingface.co/course" class="link">Start Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Transformers library across PyTorch, TensorFlow, JAX..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="9">
+                        <td>Hugging Face PEFT Library</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Documentation</td>
+                        <td>Hugging Face</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Advanced (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://github.com/huggingface/peft" class="link">View Docs</a></td>
+                        <td><textarea class="notes-input" placeholder="LoRA, QLoRA, parameter-efficient fine-tuning..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Additional Cloud & Infrastructure -->
+                    <tr data-path="intermediate,advanced" data-month="10">
+                        <td>Google Cloud ML Engineer Certification</td>
+                        <td><span class="category-tag category-cloud">Cloud Platforms</span></td>
+                        <td>Certification</td>
+                        <td>Google Cloud</td>
+                        <td>3-6 months prep</td>
+                        <td class="cost-paid">$200 exam</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 10</span></td>
+                        <td>Mid-Senior Level (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://cloud.google.com/certification/machine-learning-engineer" class="link">View Certification</a></td>
+                        <td><a href="https://cloud.google.com/learn/training/machinelearning-ai" class="link">Get Training</a></td>
+                        <td><textarea class="notes-input" placeholder="Vertex AI, BigQuery ML, AutoML..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="9">
+                        <td>Terraform for ML Infrastructure</td>
+                        <td><span class="category-tag category-devops">DevOps/MLOps</span></td>
+                        <td>Course</td>
+                        <td>HashiCorp</td>
+                        <td>Self-paced</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.hashicorp.com/resources/terraform-machine-learning-infrastructure" class="link">View Guide</a></td>
+                        <td><textarea class="notes-input" placeholder="Infrastructure as Code for ML across clouds..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Additional Advanced Courses -->
+                    <tr data-path="advanced" data-month="13">
+                        <td>SANS AI/ML for Cybersecurity</td>
+                        <td><span class="category-tag category-security">Security</span></td>
+                        <td>Course</td>
+                        <td>SANS Institute</td>
+                        <td>5 days</td>
+                        <td class="cost-paid">$7,000</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-low">Low</span></td>
+                        <td><span class="month-badge">Month 13+</span></td>
+                        <td>Advanced (5+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.sans.org/cyber-security-courses/applied-data-science-machine-learning/" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="30+ hands-on labs for threat detection..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="12">
+                        <td>Interpretable Machine Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Iowa State University</td>
+                        <td>8 weeks</td>
+                        <td class="cost-paid">$500</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 12</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.coursera.org/learn/interpretable-machine-learning" class="link">Enroll</a></td>
+                        <td><textarea class="notes-input" placeholder="Interpretable models, model-agnostic methods..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Additional Streaming/Data Resources -->
+                    <tr data-path="intermediate,advanced" data-month="9">
+                        <td>Apache Kafka Training & Certification</td>
+                        <td><span class="category-tag category-data">Data Engineering</span></td>
+                        <td>Certification</td>
+                        <td>Confluent</td>
+                        <td>2-3 months prep</td>
+                        <td class="cost-paid">$150 exam</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Mid Level (2+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.confluent.io/training/" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="Confluent Kafka Developer certification..."></textarea></td>
+                    </tr>
+                    <tr data-path="intermediate,advanced" data-month="9">
+                        <td>Apache Spark Developer Certification</td>
+                        <td><span class="category-tag category-data">Data Engineering</span></td>
+                        <td>Certification</td>
+                        <td>Databricks</td>
+                        <td>3-4 months prep</td>
+                        <td class="cost-paid">$200 exam</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-medium">Medium</span></td>
+                        <td><span class="month-badge">Month 9</span></td>
+                        <td>Mid-Senior Level (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://www.databricks.com/learn/certification/apache-spark-developer-associate" class="link">Get Certified</a></td>
+                        <td><textarea class="notes-input" placeholder="Official Apache Spark certification..."></textarea></td>
+                    </tr>
+                    
+                    <!-- Business & Product Skills -->
+                    <tr data-path="intermediate,advanced" data-month="13">
+                        <td>AI Product Management Certification</td>
+                        <td><span class="category-tag category-soft">Soft Skills</span></td>
+                        <td>Course</td>
+                        <td>Product School</td>
+                        <td>6 weeks</td>
+                        <td class="cost-paid">$1,499</td>
+                        <td><span class="difficulty difficulty-intermediate">Intermediate</span></td>
+                        <td><span class="priority-low">Low</span></td>
+                        <td><span class="month-badge">Month 13+</span></td>
+                        <td>Mid-Senior Level (3+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="https://productschool.com/ai-product-management-certification" class="link">Learn More</a></td>
+                        <td><textarea class="notes-input" placeholder="AI product strategy and development lifecycle..."></textarea></td>
+                    </tr>
+                    
+                    <!-- University-Level Advanced Courses -->
+                    <tr data-path="advanced" data-month="3">
+                        <td>Stanford CS224n: NLP with Deep Learning</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Stanford University</td>
+                        <td>Full semester</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 3</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="http://cs224n.stanford.edu/" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="Advanced NLP with transformers, attention..."></textarea></td>
+                    </tr>
+                    <tr data-path="advanced" data-month="4">
+                        <td>Stanford CS231n: Computer Vision</td>
+                        <td><span class="category-tag category-ml">Machine Learning</span></td>
+                        <td>Course</td>
+                        <td>Stanford University</td>
+                        <td>Full semester</td>
+                        <td class="cost-free">Free</td>
+                        <td><span class="difficulty difficulty-advanced">Advanced</span></td>
+                        <td><span class="priority-high">High</span></td>
+                        <td><span class="month-badge">Month 4</span></td>
+                        <td>Advanced (4+ years)</td>
+                        <td><select class="progress-selector progress-not-started" onchange="updateProgress(this)"><option value="Not Started">Not Started</option><option value="In Progress">In Progress</option><option value="Completed">Completed</option></select></td>
+                        <td><a href="http://cs231n.stanford.edu/" class="link">View Course</a></td>
+                        <td><textarea class="notes-input" placeholder="CNNs, image classification, object detection..."></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Timeline Tab -->
+    <div id="timeline" class="tab-content">
+        <div class="timeline">
+            <!-- Timeline will be populated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Progress Tab -->
+    <div id="progress" class="tab-content">
+        <div class="dashboard">
+            <div class="stat-card">
+                <div class="stat-number" style="color: #667eea;" id="monthlyProgress">0%</div>
+                <div class="stat-label">Current Month Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #27ae60;" id="streakDays">0</div>
+                <div class="stat-label">Learning Streak (Days)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #f39c12;" id="estimatedCompletion">--</div>
+                <div class="stat-label">Est. Completion</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: #e74c3c;" id="totalHours">0</div>
+                <div class="stat-label">Total Study Hours</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h3>Progress by Category</h3>
+            <div id="categoryProgress" style="margin-top: 20px;">
+                <!-- Category progress bars will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSort = { column: -1, direction: 'asc' };
+    let selectedPath = 'beginner';
+    let resourceData = [];
+    
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeData();
+        updateDashboard();
+        generateTimeline();
+        loadSavedProgress();
+    });
+    
+    function initializeData() {
+        const tableRows = document.querySelectorAll('#tableBody tr');
+        resourceData = Array.from(tableRows).map((row, index) => {
+            const cells = row.querySelectorAll('td');
+            return {
+                id: index,
+                title: cells[0].textContent,
+                category: cells[1].textContent,
+                type: cells[2].textContent,
+                provider: cells[3].textContent,
+                duration: cells[4].textContent,
+                cost: cells[5].textContent,
+                difficulty: cells[6].textContent,
+                priority: cells[7].textContent,
+                month: cells[8].textContent,
+                experienceLevel: cells[9].textContent,
+                progress: 'Not Started',
+                notes: ''
+            };
+        });
+    }
+    
+    function showTab(tabName) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Show selected tab
+        document.getElementById(tabName).classList.add('active');
+        
+        // Update nav buttons
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        if (tabName === 'timeline') {
+            generateTimeline();
+        }
+    }
+    
+    function updateProgress(selectElement) {
+        const row = selectElement.closest('tr');
+        const resourceId = Array.from(document.querySelectorAll('#tableBody tr')).indexOf(row);
+        const newProgress = selectElement.value;
+        
+        // Update visual style
+        selectElement.className = `progress-selector progress-${newProgress.toLowerCase().replace(' ', '-')}`;
+        
+        // Update data
+        if (resourceData[resourceId]) {
+            resourceData[resourceId].progress = newProgress;
+        }
+        
+        updateDashboard();
+        saveProgress();
+    }
+    
+    function updateDashboard() {
+        const total = resourceData.length;
+        const completed = resourceData.filter(r => r.progress === 'Completed').length;
+        const inProgress = resourceData.filter(r => r.progress === 'In Progress').length;
+        const notStarted = resourceData.filter(r => r.progress === 'Not Started').length;
+        const progressPercentage = Math.round((completed / total) * 100);
+        
+        document.getElementById('totalResources').textContent = total;
+        document.getElementById('completedResources').textContent = completed;
+        document.getElementById('inProgressResources').textContent = inProgress;
+        document.getElementById('notStartedResources').textContent = notStarted;
+        
+        // Update free resources count
+        const freeCount = resourceData.filter(r => r.cost && r.cost.includes('Free')).length;
+        document.getElementById('freeResources').textContent = freeCount;
+        
+        // Update advanced resources count
+        const advancedCount = resourceData.filter(r => r.difficulty && r.difficulty.includes('Advanced')).length;
+        document.getElementById('advancedResources').textContent = advancedCount;
+    }
+    
+    function generateTimeline() {
+        const timeline = document.querySelector('.timeline');
+        timeline.innerHTML = '';
+        
+        const monthData = {};
+        
+        // Group resources by month
+        resourceData.forEach(resource => {
+            const monthMatch = resource.month.match(/Month (\d+)/);
+            if (monthMatch) {
+                const monthNum = parseInt(monthMatch[1]);
+                if (!monthData[monthNum]) {
+                    monthData[monthNum] = [];
+                }
+                monthData[monthNum].push(resource);
+            }
+        });
+        
+        // Create timeline entries
+        Object.keys(monthData).sort((a, b) => parseInt(a) - parseInt(b)).forEach(month => {
+            const monthDiv = document.createElement('div');
+            monthDiv.className = 'timeline-month';
+            
+            const content = document.createElement('div');
+            content.className = 'timeline-content';
+            
+            const marker = document.createElement('div');
+            marker.className = 'timeline-marker';
+            
+            const title = document.createElement('h3');
+            title.className = 'month-title';
+            title.textContent = `Month ${month}`;
+            
+            const resourcesList = document.createElement('ul');
+            resourcesList.className = 'month-resources';
+            resourcesList.style.listStyle = 'none';
+            resourcesList.style.padding = '0';
+            
+            monthData[month].forEach(resource => {
+                const li = document.createElement('li');
+                li.style.padding = '8px 0';
+                li.style.borderBottom = '1px solid #ecf0f1';
+                li.style.display = 'flex';
+                li.style.justifyContent = 'space-between';
+                li.style.alignItems = 'center';
+                
+                const resourceInfo = document.createElement('div');
+                resourceInfo.className = 'resource-info';
+                resourceInfo.innerHTML = `
+                    <strong>${resource.title}</strong>
+                    <span class="resource-duration" style="font-size: 0.8em; color: #7f8c8d; margin-left: 10px;">${resource.duration}</span>
+                `;
+                li.appendChild(resourceInfo);
+                resourcesList.appendChild(li);
+            });
+            
+            content.appendChild(title);
+            content.appendChild(resourcesList);
+            monthDiv.appendChild(content);
+            monthDiv.appendChild(marker);
+            timeline.appendChild(monthDiv);
+        });
+    }
+    
+    function sortTable(columnIndex) {
+        const table = document.getElementById('resourceTable');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        
+        if (currentSort.column === columnIndex) {
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort.direction = 'asc';
+        }
+        currentSort.column = columnIndex;
+        
+        rows.sort((a, b) => {
+            const aVal = a.cells[columnIndex].textContent.trim();
+            const bVal = b.cells[columnIndex].textContent.trim();
+            
+            if (currentSort.direction === 'asc') {
+                return aVal.localeCompare(bVal);
+            } else {
+                return bVal.localeCompare(aVal);
+            }
+        });
+        
+        rows.forEach(row => tbody.appendChild(row));
+        
+        // Update header indicators
+        document.querySelectorAll('th').forEach((th, index) => {
+            const indicator = th.querySelector('.sort-indicator');
+            if (indicator) indicator.remove();
+            
+            if (index === columnIndex) {
+                const arrow = document.createElement('span');
+                arrow.className = 'sort-indicator';
+                arrow.textContent = currentSort.direction === 'asc' ? ' ↑' : ' ↓';
+                arrow.style.position = 'absolute';
+                arrow.style.right = '10px';
+                th.appendChild(arrow);
+            }
+        });
+    }
+    
+    function filterTable() {
+        const category = document.getElementById('categoryFilter').value;
+        const type = document.getElementById('typeFilter').value;
+        const difficulty = document.getElementById('difficultyFilter').value;
+        const cost = document.getElementById('costFilter').value;
+        const progress = document.getElementById('progressFilter').value;
+        const month = document.getElementById('monthFilter').value;
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        
+        const tbody = document.getElementById('tableBody');
+        const rows = tbody.querySelectorAll('tr');
+        
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td, select, textarea');
+            const title = cells[0].textContent.toLowerCase();
+            const rowCategory = cells[1].textContent;
+            const rowType = cells[2].textContent;
+            const rowDifficulty = cells[6].textContent;
+            const rowCost = cells[5].textContent.includes('Free') ? 'Free' : 'Paid';
+            const rowProgress = cells[10].value || 'Not Started';
+            const rowMonth = cells[8].textContent.match(/\d+/)?.[0];
+            
+            let show = true;
+            
+            if (category && !rowCategory.includes(category)) show = false;
+            if (type && !rowType.includes(type)) show = false;
+            if (difficulty && !rowDifficulty.includes(difficulty)) show = false;
+            if (cost && rowCost !== cost) show = false;
+            if (progress && rowProgress !== progress) show = false;
+            if (month && rowMonth !== month) show = false;
+            if (search && !title.includes(search)) show = false;
+            
+            row.style.display = show ? '' : 'none';
+        });
+    }
+    
+    function saveProgress() {
+        const progressData = {
+            resources: resourceData,
+            lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem('aiEngineerProgress', JSON.stringify(progressData));
+    }
+    
+    function loadProgress() {
+        const saved = localStorage.getItem('aiEngineerProgress');
+        if (saved) {
+            const data = JSON.parse(saved);
+            resourceData = data.resources;
+            
+            // Update UI
+            document.querySelectorAll('#tableBody tr').forEach((row, index) => {
+                if (resourceData[index]) {
+                    const progressSelect = row.querySelector('.progress-selector');
+                    const notesTextarea = row.querySelector('.notes-input');
+                    
+                    progressSelect.value = resourceData[index].progress;
+                    progressSelect.className = `progress-selector progress-${resourceData[index].progress.toLowerCase().replace(' ', '-')}`;
+                    notesTextarea.value = resourceData[index].notes || '';
+                }
+            });
+            
+            updateDashboard();
+        }
+    }
+    
+    function loadSavedProgress() {
+        loadProgress();
+    }
+    
+    function resetProgress() {
+        if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+            localStorage.removeItem('aiEngineerProgress');
+            location.reload();
+        }
+    }
+    
+    function exportToCSV() {
+        const headers = ['Title', 'Category', 'Type', 'Provider', 'Duration', 'Cost', 'Difficulty', 'Priority', 'Month', 'Experience Level', 'Progress', 'Link', 'Personal Notes'];
+        
+        let csv = [headers.join(',')];
+        
+        resourceData.forEach(resource => {
+            const row = [
+                `"${resource.title}"`,
+                `"${resource.category}"`,
+                `"${resource.type}"`,
+                `"${resource.provider}"`,
+                `"${resource.duration}"`,
+                `"${resource.cost}"`,
+                `"${resource.difficulty}"`,
+                `"${resource.priority}"`,
+                `"${resource.month}"`,
+                `"${resource.experienceLevel}"`,
+                `"${resource.progress}"`,
+                `"${resource.link || ''}"`,
+                `"${resource.notes || ''}"`
+            ];
+            csv.push(row.join(','));
+        });
+        
+        const csvContent = csv.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ai_engineer_progress_${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+    
+    // Event listeners
+    document.getElementById('categoryFilter').addEventListener('change', filterTable);
+    document.getElementById('typeFilter').addEventListener('change', filterTable);
+    document.getElementById('difficultyFilter').addEventListener('change', filterTable);
+    document.getElementById('costFilter').addEventListener('change', filterTable);
+    document.getElementById('progressFilter').addEventListener('change', filterTable);
+    document.getElementById('monthFilter').addEventListener('change', filterTable);
+    document.getElementById('searchInput').addEventListener('input', filterTable);
+    
+    // Learning path selection
+    document.querySelectorAll('.path-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.path-card').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPath = this.dataset.path;
+        });
+    });
+    
+    // Auto-save notes
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('notes-input')) {
+            const row = e.target.closest('tr');
+            const resourceId = Array.from(document.querySelectorAll('#tableBody tr')).indexOf(row);
+            if (resourceData[resourceId]) {
+                resourceData[resourceId].notes = e.target.value;
+                saveProgress();
+            }
+        }
+    });
+</script>
+```
+
+</body>
+</html>
